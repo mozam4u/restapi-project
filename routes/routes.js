@@ -4,9 +4,10 @@ const res = require('express/lib/response');
 const Model = require('../models/model');
 const router = express.Router();
 const bodyParser=require ('body-parser');
-// Post Method working(success)
 
-router.use(bodyParser.json());
+// router.use(bodyParser.json());
+
+    //     //-- -- -- -- -- -- -- -- -- -- -- - post type working(success)-- -- -- -- -- -- -- -- -- -- -
 
 router.post('/postNew', (req, res) => {
         console.log("hi", req.body);
@@ -35,23 +36,8 @@ router.get('/:postId', async(request, response) => {
         })
     })
 
-    //     //-- -- -- -- -- -- -- -- -- -- -- - get type working(success)-- -- -- -- -- -- -- -- -- -- -
-    router.get('/:postId', async(request, response) => {
-        Model.find({
-            "_id": request.params.postId
-        }, (error, result) => {
-            console.log("test", result);
-            if (result) {
-
-                return response.send({ "status": true, "message": "record found", "Result": result });
-            }
-            return response.status(500).send(error);
-            //response.send(result);
-        })
-    })
-
    
-    //     //--------------------------------delete method working(success)----------------------------
+         //--------------------------------delete method working(success)----------------------------
 router.delete('/:postId', async(request, response) => {
     Model.findByIdAndDelete({
         "_id": request.params.postId
